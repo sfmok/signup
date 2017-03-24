@@ -1,0 +1,4 @@
+[24-Mar-2017 08:36:59 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\wamp64\www\phpmvclogin\public\index.php(31): Core\Router->dispatch('abc')
+#1 {main}
+Thrown in 'C:\wamp64\www\phpmvclogin\Core\Router.php' on line 130
