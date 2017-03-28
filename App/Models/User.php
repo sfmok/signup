@@ -5,7 +5,7 @@ namespace App\Models;
 use PDO;
 
 /**
- * Example user model
+ * User model
  *
  * PHP version 7.0
  */
@@ -22,11 +22,11 @@ class User extends \Core\Model
     /**
      * Class constructor
      *
-     * @param array $data  Initial property values
+     * @param array $data  Initial property values (optional)
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data = [])
     {
         foreach ($data as $key => $value) {
             $this->$key = $value;
@@ -36,7 +36,7 @@ class User extends \Core\Model
     /**
      * Save the user model with the current property values
      *
-     * @return void
+     * @return boolean  True if the user was saved, false otherwise
      */
     public function save()
     {
@@ -109,14 +109,50 @@ class User extends \Core\Model
      */
     public static function emailExists($email)
     {
+        return static::findByEmail($email) !== false;
+    }
+
+    /**
+     * Find a user model by email address
+     *
+     * @param string $email email address to search for
+     *
+     * @return mixed User object if found, false otherwise
+     */
+    public static function findByEmail($email)
+    {
         $sql = 'SELECT * FROM users WHERE email = :email';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class()); //get_called_class() = 'App\Models\User'
+        // object result: array without this line
 
         $stmt->execute();
 
-        return $stmt->fetch() !== false;
+        return $stmt->fetch();
+    }
+    
+    /**
+     * Authenticate a user by email and password.
+     *
+     * @param string $email email address
+     * @param string $password password
+     *
+     * @return mixed  The user object or false if authentication fails
+     */
+    public static function authenticate($email, $password)
+    {
+        $user = static::findByEmail($email);
+
+        if ($user) {
+            if (password_verify($password, $user->password_hash)) {
+                return $user;
+            }
+        }
+
+        return false;
     }
 }
