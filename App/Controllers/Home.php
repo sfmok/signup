@@ -19,6 +19,9 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
+//        View::renderTemplate('Home/index.html', [
+//            'user' => Auth::getUser()
+//        ]); moved as global twig variable
         View::renderTemplate('Home/index.html');
     }
 }
