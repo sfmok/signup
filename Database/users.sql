@@ -6,3 +6,13 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (`id`), 
     UNIQUE (`email`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS remembered_logins ( 
+    `token_hash` VARCHAR(64) NOT NULL , 
+    `user_id` INT NOT NULL , 
+    `expires_at` DATETIME NOT NULL , 
+    PRIMARY KEY (`token_hash`), 
+    INDEX (`user_id`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE remembered_logins ADD FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
