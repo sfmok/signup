@@ -22,6 +22,7 @@ class Home extends \Core\Controller
 //        View::renderTemplate('Home/index.html', [
 //            'user' => Auth::getUser()
 //        ]); moved as global twig variable
+//        \App\Mail::send('alexandruiuliancucu@yahoo.es', 'Test', 'This is a test', '<h1>This is a test</h1>');
         View::renderTemplate('Home/index.html');
     }
 }

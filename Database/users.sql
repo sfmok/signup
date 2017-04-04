@@ -2,9 +2,11 @@ CREATE TABLE IF NOT EXISTS users (
     `id` INT NOT NULL AUTO_INCREMENT , 
     `name` VARCHAR(50) NOT NULL , 
     `email` VARCHAR(255) NOT NULL , 
-    `password_hash` VARCHAR(255) NOT NULL , 
+    `password_hash` VARCHAR(255) NOT NULL ,
+    `password_reset_hash` VARCHAR(64) NULL DEFAULT NULL ,
+    `password_reset_expires_at` DATETIME NULL DEFAULT NULL ,   
     PRIMARY KEY (`id`), 
-    UNIQUE (`email`)
+    UNIQUE (`email`, `password_reset_hash`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS remembered_logins ( 
