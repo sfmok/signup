@@ -18,3 +18,8 @@ CREATE TABLE IF NOT EXISTS remembered_logins (
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE remembered_logins ADD FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `users`
+    ADD `activation_hash` VARCHAR(64) NULL DEFAULT NULL AFTER `password_reset_expires_at`,
+    ADD `is_active` BOOLEAN NOT NULL DEFAULT FALSE AFTER `activation_hash`,
+    ADD UNIQUE (`activation_hash`);
