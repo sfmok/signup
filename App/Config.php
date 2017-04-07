@@ -45,6 +45,7 @@ class Config
      * @var boolean
      */
     const SECRET_KEY = 'b3M1DoeC1Z9xA3OPI26g6948O5Xu3i75';
+//    http://randomkeygen.com/
     
     /**
      * Mailgun API key
