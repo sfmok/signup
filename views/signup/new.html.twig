@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+    {#<form id="msform" name="signup" method="post" action="/signup/create">
+        <!-- progressbar -->
+        <ul id="progressbar">
+            <li class="active">Personal Details</li>
+            <li>Address</li>
+            <li>Payment Details</li>
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+            <h2 class="fs-title">Personal Details</h2>
+            <h3 class="fs-subtitle">This is step 1</h3>
+            <input type="text" name="firstname" placeholder="First Name" value="{{ user.firstName }}" required/>
+            <input type="text" name="lastname" placeholder="Last Name" value="{{ user.lastName }}" required/>
+            <input type="number" name="telephone" placeholder="Telephone" value="{{ user.telephone }}" required/>
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Your Address</h2>
+            <h3 class="fs-subtitle">This is step 2</h3>
+            <input type="text" name="address" placeholder="Address including street" value="{{ user.address }}" required/>
+            <input type="text" name="city" placeholder="City" value="{{ user.city }}" required/>
+            <input type="number" name="zip" placeholder="Zip code" value="{{ user.zip }}" required/>
+            <input type="number" name="house_number" placeholder="House Number" value="{{ user.houseNumber }}" required/>
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Payment Details</h2>
+            <h3 class="fs-subtitle">This is step 3</h3>
+            <input type="text" name="account_owner" placeholder="Account Owner" value="{{ user.accountOwner }}" required/>
+            <input type="text" name="iban" placeholder="Iban" value="{{ user.iban }}" required/>
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="submit" name="submit" class="submit action-button" value="Next" />
+        </fieldset>
+    </form>#}
+    <div class="container">
+        <form id="contact" action="/signup/create" method="post">
+            <div>
+                <h3>Personal Details</h3>
+                <section>
+                    <label for="firstname">First Name *</label>
+                    <input id="firstname" name="firstname" type="text" class="required" value="{{ user.firstName }}">
+                    <label for="lastname">Last Name *</label>
+                    <input id="lastname" name="lastname" type="text" class="required" value="{{ user.lastName }}">
+                    <label for="telephone">Telephone *</label>
+                    <input id="telephone" name="telephone" type="text" class="required number" value="{{ user.telephone }}">
+                    <p>(*) Mandatory</p>
+                </section>
+                <h3>Your Address</h3>
+                <section>
+                    <label for="address">Address *</label>
+                    <input id="address" name="address" type="text" class="required" value="{{ user.address }}">
+                    <label for="city">City *</label>
+                    <input id="city" name="city" type="text" class="required" value="{{ user.city }}">
+                    <label for="zip">Zip Code *</label>
+                    <input id="zip" name="zip" type="text" class="required number" value="{{ user.zip }}">
+                    <label for="house_number">House Number *</label>
+                    <input id="house_number" name="house_number" type="text" class="required number" value="{{ user.houseNumber }}">
+                    <p>(*) Mandatory</p>
+                </section>
+                <h3>Payment Details</h3>
+                <section>
+                    <label for="account_owner">Account Owner *</label>
+                    <input id="account_owner" name="account_owner" type="text" class="required" value="{{ user.accountOwner }}">
+                    <label for="iban">Iban *</label>
+                    <input id="iban" name="iban" type="text" class="required" value="{{ user.iban }}">
+                    <p>(*) Mandatory</p>
+                </section>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/app.js"></script>
+{% endblock %}

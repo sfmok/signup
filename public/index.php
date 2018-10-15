@@ -1,42 +1,18 @@
 <?php
 
-/**
- * Front controller
- *
- * PHP version 7.0
- */
+use GuzzleHttp\Psr7\ServerRequest;
 
-/**
- * Composer
- */
-require dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__)."/config/bootstrap.php";
 
+$bundles = [
+    App\AuthBundle\AuthBundle::class
+];
 
-/**
- * Error and Exception handling
- */
-error_reporting(E_ALL);
-set_error_handler('Core\Error::errorHandler');
-set_exception_handler('Core\Error::exceptionHandler');
+$builder = new \DI\ContainerBuilder();
+$builder->addDefinitions(dirname(__DIR__) . '/core/config.php');
+$container = $builder->build();
 
+$kernel = new Core\Kernel($container, $bundles);
 
-/**
- * Sessions
- */
-session_start();
-
-
-/**
- * Routing
- */
-$router = new Core\Router();
-
-// Add the routes
-$router->add('', ['controller' => 'Home', 'action' => 'index']);
-$router->add('login', ['controller' => 'Login', 'action' => 'new']);
-$router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
-$router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
-$router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
-$router->add('{controller}/{action}');
-    
-$router->dispatch($_SERVER['QUERY_STRING']);
+$response = $kernel->run(ServerRequest::fromGlobals());
+\Http\Response\send($response);

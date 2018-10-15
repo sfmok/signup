@@ -1,21 +1,35 @@
-/**
- * Add jQuery Validation plugin method for a valid password
- *
- * Valid passwords contain at least one letter and one number.
- */
-$.validator.addMethod('validPassword',
-    function(value, element, param) {
-
-        if (value != '') {
-            if (value.match(/.*[a-z]+.*/i) == null) {
-                return false;
-            }
-            if (value.match(/.*\d+.*/) == null) {
-                return false;
-            }
+var form = $("#contact");
+form.validate({
+    errorPlacement: function errorPlacement(error, element) { element.before(error); }
+});
+form.children("div").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    onStepChanging: function (event, currentIndex, newIndex)
+    {
+        if(currentIndex > newIndex) {
+            return true;
         }
 
-        return true;
+        $.ajax({
+            type: "POST",
+            url: '/signup/ajax-save-step',
+            data: form.serialize(),
+            success: function(response) {
+
+            }
+
+        });
+        return form.valid();
+
     },
-    'Must contain at least one letter and one number'
-);
+    onFinishing: function (event, currentIndex)
+    {
+        return form.valid();
+    },
+    onFinished: function (event, currentIndex)
+    {
+        form.submit();
+    }
+});

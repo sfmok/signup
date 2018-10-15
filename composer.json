@@ -1,15 +1,24 @@
 {
     "require": {
         "twig/twig": "~2.0",
-        "mailgun/mailgun-php": "^2.1",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.5",
-        "phpmailer/phpmailer": "^5.2"
+        "doctrine/orm": "2.6.*",
+        "symfony/yaml": "2.*",
+        "doctrine/annotations": "^1.6",
+        "guzzlehttp/psr7": "^1.4",
+        "http-interop/response-sender": "^1.0",
+        "zendframework/zend-expressive-fastroute": "^3.0",
+        "php-di/php-di": "^6.0"
     },
     "autoload": {
         "psr-4": {
-             "Core\\": "Core/",
-             "App\\": "App/"
+             "Core\\": "core/",
+             "App\\": "src/",
+             "Tests\\": "tests/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
     }
 }
