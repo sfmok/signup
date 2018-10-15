@@ -45,7 +45,7 @@ class Kernel
         $route = $this->router->match($request);
 
         if (is_null($route)) {
-            return new Response(404, [], 'This route is not found');
+            return new Response(404, [], '<h1>This route is not found</h1>');
         }
 
         $params = $route->getParams();

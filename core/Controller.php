@@ -2,7 +2,7 @@
 
 namespace Core;
 
-abstract class Controller
+class Controller
 {
     /**
      * Redirect to a different page
@@ -13,7 +13,6 @@ abstract class Controller
      */
     public function redirect($url): void
     {
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
-        exit;
+        exit(header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303));
     }
 }

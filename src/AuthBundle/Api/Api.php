@@ -6,7 +6,8 @@ class Api
 {
     public static $url = 'https://37f32cl571.execute-api.eu-central-1.amazonaws.com/default/wunderfleet-recruiting-backend-dev-save-payment-data';
 
-    public static function postAPI($data){
+    public static function postAPI($data)
+    {
 
         $curl = curl_init();
 
@@ -24,7 +25,9 @@ class Api
         // EXECUTE:
         $result = curl_exec($curl);
 
-        if(!$result){ die("Connection Failure"); }
+        if (!$result) {
+            die("Connection Failure");
+        }
 
         curl_close($curl);
 

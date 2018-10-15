@@ -9,7 +9,6 @@ use App\AuthBundle\Entity\User;
 use App\AuthBundle\Manager\UserManager;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-
 class SignupController extends Controller
 {
     /**
@@ -37,8 +36,7 @@ class SignupController extends Controller
         Session $session,
         UserManager $userManager,
         Twig $twig
-    )
-    {
+    ) {
 
         $this->session = $session;
         $this->userManager = $userManager;
@@ -47,7 +45,7 @@ class SignupController extends Controller
 
     public function index()
     {
-       return $this->twig->render('signup/index.html.twig');
+        return $this->twig->render('signup/index.html.twig');
     }
 
     public function new()
@@ -55,7 +53,7 @@ class SignupController extends Controller
         $user = new User();
 
         /* CHECK DATA USER IN SESSION */
-        if($this->session->has('user') && $this->session->get('user') instanceof User) {
+        if ($this->session->has('user') && $this->session->get('user') instanceof User) {
             /* GET DATA USER IN SESSION */
             $user = $this->session->get('user');
         } else {
@@ -69,7 +67,6 @@ class SignupController extends Controller
     public function create(Request $request)
     {
         if ('POST' == $request->getMethod()) {
-
             $data = $request->getParsedBody();
             $user = $this->session->get('user');
             $user = $this->userManager->parseDataSignup($user, $data);

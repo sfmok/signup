@@ -10,11 +10,14 @@ class Twig
 
     private $loader;
 
-    public function __construct(Session $session)
+    public function __construct(Session $session = null)
     {
         $this->loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/views');
         $this->twig = new \Twig_Environment($this->loader, []);
-        $this->addGlobal('session', $session);
+
+        if(!is_null($session)) {
+            $this->addGlobal('session', $session);
+        }
     }
 
     /**
